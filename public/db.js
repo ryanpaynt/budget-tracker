@@ -28,6 +28,8 @@ const saveRecords = (record) => {
 }
 
 const checkDb = () => {
+    const db = request.result;
+
     const trans = db.transaction(['pending-transactions'], 'readWrite');
 
     const objStore = trans.objectStore('pending-transactions');
