@@ -65,4 +65,4 @@ const checkDb = () => {
     }
 }
 
-window.addEventListener('online', checkDb);
+window.addEventListener("online", checkDb);
