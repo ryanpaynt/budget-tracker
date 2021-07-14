@@ -34,35 +34,30 @@ const checkDb = () => {
     
     const all = objStore.getAll();
 
-    all.onsuccess = () => {
-        if (all.result.length > 0){
-            fetch('api/transaction', {
-                method: 'POST',
-                body: JSON.stringify(all.result),
-                headers: {
-                    Accept: 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(serverResponse => {
-                if(serverResponse.message){
-                    throw new Error(serverResponse);
-                }
-
-                const trans = db.transaction(['newTrans'], 'readWrite');
-
-                const objStore = trans.objectStore('newTrans');
-
-                objStore.clear();
-
-                alert('All saved transactions have been submitted!');
-            })
-            .catch(err => {
-                console.log(err);
-            });
+getAll.onsuccess = function() {
+    if (getAll.result.length > 0) {
+      fetch("/api/transaction/bulk", {
+        method: "POST",
+        body: JSON.stringify(getAll.result),
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json"
         }
+      })
+      .then(response => response.json())
+      .then(() => {
+        // if successful, open a transaction on your pending db
+        const transaction = db.transaction(["pending"], "readwrite");
+
+        // access your pending object store
+        const store = transaction.objectStore("pending");
+
+        // clear all items in your store
+        store.clear();
+      });
     }
+  };
 }
 
-window.addEventListener('online', uploadTransaction);
+// listen for app coming back online
+window.addEventListener("online", checkDatabase);
