@@ -8,7 +8,7 @@ request.onupgradeneeded = (event) => {
 };
 
 request.onsuccess = (event) => {
-    db = request.result;
+    db = event.target.result;
 
     if(navigator.onLine) {
         checkDb();
