@@ -65,4 +65,4 @@ const checkDb = () => {
     }
 }
 
-window.addEventListener('online', uploadTransaction);
+window.addEventListener('online', checkDb);
