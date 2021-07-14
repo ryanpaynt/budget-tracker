@@ -4,7 +4,7 @@ const request = window.indexedDB.open('Budget-Tracker', 1);
 
 request.onupgradeneeded = (event) => {
     const db = event.target.result;
-    db.createObjectStore('newTrans', {autoIncrement: true});
+    db.createObjectStore('pending-transactions', {autoIncrement: true});
 };
 
 request.onsuccess = (event) => {
@@ -20,17 +20,17 @@ request.onerror = (event) => {
 };
 
 const saveRecords = (record) => {
-    const trans = db.transaction(['newTrans'], 'readWrite');
+    const trans = db.transaction(['pending-transactions'], 'readWrite');
 
-    const objStore = trans.objectStore('newTrans');
+    const objStore = trans.objectStore('pending-transactions');
 
     objStore.add(record);
 }
 
 const checkDb = () => {
-    const trans = db.transaction(['newTrans'], 'readWrite');
+    const trans = db.transaction(['pending-transactions'], 'readWrite');
 
-    const objStore = trans.objectStore('newTrans');
+    const objStore = trans.objectStore('pending-transactions');
     
     const all = objStore.getAll();
 
@@ -50,9 +50,9 @@ const checkDb = () => {
                     throw new Error(serverResponse);
                 }
 
-                const trans = db.transaction(['newTrans'], 'readWrite');
+                const trans = db.transaction(['pending-transactions'], 'readWrite');
 
-                const objStore = trans.objectStore('newTrans');
+                const objStore = trans.objectStore('pending-transactions');
 
                 objStore.clear();
 
