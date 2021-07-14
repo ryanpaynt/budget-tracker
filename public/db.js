@@ -20,7 +20,7 @@ request.onerror = (event) => {
 };
 
 const saveRecords = (record) => {
-    const trans = db.transaction(['pending-transactions'], 'readWrite');
+    const trans = db.transaction(['pending-transactions'], 'readwrite');
 
     const objStore = trans.objectStore('pending-transactions');
 
@@ -30,7 +30,7 @@ const saveRecords = (record) => {
 const checkDb = () => {
     const db = request.result;
 
-    const trans = db.transaction(['pending-transactions'], 'readWrite');
+    const trans = db.transaction(['pending-transactions'], 'readwrite');
 
     const objStore = trans.objectStore('pending-transactions');
     
@@ -52,7 +52,7 @@ const checkDb = () => {
                     throw new Error(serverResponse);
                 }
 
-                const trans = db.transaction(['pending-transactions'], 'readWrite');
+                const trans = db.transaction(['pending-transactions'], 'readwrite');
 
                 const objStore = trans.objectStore('pending-transactions');
 
