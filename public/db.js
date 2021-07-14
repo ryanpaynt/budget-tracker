@@ -19,4 +19,10 @@ request.onerror = (event) => {
     console.log(event.target.errorCode);
 };
 
+const saveRecords = (record) => {
+    const trans = db.transaction(['newTrans'], 'readWrite');
 
+    const objStore = trans.objectStore('newTrans');
+
+    objStore.add(record);
+}
