@@ -8,6 +8,7 @@ request.onupgradeneeded = (event) => {
 };
 
 request.onsuccess = (event) => {
+    const db = event.target.result;
     console.log(`Success! ${event.type}`);
 
     if(navigator.onLine) {
