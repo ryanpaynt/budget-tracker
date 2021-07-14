@@ -3,12 +3,12 @@ let db;
 const request = window.indexedDB.open('budget', 1);
 
 request.onupgradeneeded = (event) => {
-    const db = event.target.result;
+     db = event.target.result;
     db.createObjectStore('pending-transactions', {autoIncrement: true});
 };
 
 request.onsuccess = (event) => {
-    const db = event.target.result;
+     db = event.target.result;
     console.log(`Success! ${event.type}`);
 
     if(navigator.onLine) {
@@ -29,7 +29,7 @@ const saveRecord = (record) => {
 }
 
 const checkDb = () => {
-    const db = request.result;
+     db = request.result;
 
     const trans = db.transaction(['pending-transactions'], 'readwrite');
 
