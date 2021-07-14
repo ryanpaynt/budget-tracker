@@ -11,7 +11,7 @@ request.onsuccess = (event) => {
     db = event.target.request;
 
     if(navigator.onLine) {
-        uploadTransaction();
+        checkDb();
     }
 };
 
