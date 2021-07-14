@@ -46,7 +46,6 @@ self.addEventListener("install", function (evt) {
               if (response.status === 200) {
                 cache.put(evt.request.url, response.clone());
               }
-  
               return response;
             })
             .catch(err => {
