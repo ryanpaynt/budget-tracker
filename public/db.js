@@ -20,7 +20,7 @@ request.onerror = (event) => {
     console.log(event.target.errorCode);
 };
 
-const saveRecords = (record) => {
+const saveRecord = (record) => {
     const trans = db.transaction(['pending-transactions'], 'readwrite');
 
     const objStore = trans.objectStore('pending-transactions');
